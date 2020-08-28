@@ -8,7 +8,7 @@
         <div class="col-sm-4">
           <div class="sidebar">
             <Social />
-            <Posts />
+            <Posts :popular="popular" :recent="recent" :top="top" />
 
           </div>
         </div>
@@ -22,7 +22,7 @@ import Topstories from '@/components/bottom/Topstories'
 import Social from '@/components/side/Social'
 import Posts from '@/components/side/Sideposts'
 export default {
-
+  props: ['popular', 'recent', 'top'],
   components:{
     Topstories,
     Social,

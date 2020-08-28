@@ -9,117 +9,21 @@
       <div class="owl-wrapper">
         <div class="owl-carousel" data-num="4">
 
-          <div class="item">
+          <div v-for="post in posts" :key="post.id" class="item">
             <div class="news-post image-post">
               <div class="post-gallery">
-                <img src="upload/news-posts/h9.jpg" alt="">
+                <img src="/upload/news-posts/h9.jpg" alt="">
                 <div class="hover-box">
                   <div class="inner-hover">
                     <a class="category-post" href="game-category.html">adventure</a>
-                    <h2><a href="single-post.html">Nullam malesuada erat ut turpis.</a></h2>
+                    <h2><a href="single-post.html">{{post.title}}</a></h2>
                     <ul class="post-tags">
                       <li><i class="fa fa-clock-o"></i>27 may 2013</li>
                       <li><i class="fa fa-user"></i>by <a href="#">John Doe</a></li>
                       <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
                       <li><i class="fa fa-eye"></i>872</li>
                     </ul>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.</p>
-                    <div class="rate-level">
-                      <p><span>9.2</span> Amazing</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="news-post image-post">
-              <div class="post-gallery">
-                <img src="upload/news-posts/h10.jpg" alt="">
-                <div class="hover-box">
-                  <div class="inner-hover">
-                    <a class="category-post" href="game-category.html">action</a>
-                    <h2><a href="single-post.html">Phasellus ultrices nulla quis nibh. Quisque a lectus. </a></h2>
-                    <ul class="post-tags">
-                      <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                      <li><i class="fa fa-user"></i>by <a href="#">John Doe</a></li>
-                      <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-                      <li><i class="fa fa-eye"></i>872</li>
-                    </ul>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.</p>
-                    <div class="rate-level">
-                      <p><span>6.0</span> Okay</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="news-post image-post">
-              <div class="post-gallery">
-                <img src="upload/news-posts/h11.jpg" alt="">
-                <div class="hover-box">
-                  <div class="inner-hover">
-                    <a class="category-post" href="game-category.html">action</a>
-                    <h2><a href="single-post.html">Suspendisse urna </a></h2>
-                    <ul class="post-tags">
-                      <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                      <li><i class="fa fa-user"></i>by <a href="#">John Doe</a></li>
-                      <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-                      <li><i class="fa fa-eye"></i>872</li>
-                    </ul>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.</p>
-                    <div class="rate-level">
-                      <p><span>9.2</span> Amazing</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="news-post image-post">
-              <div class="post-gallery">
-                <img src="upload/news-posts/h12.jpg" alt="">
-                <div class="hover-box">
-                  <div class="inner-hover">
-                    <a class="category-post" href="game-category.html">racing</a>
-                    <h2><a href="single-post.html">Aliquam porttitor mauris sit amet orci.</a></h2>
-                    <ul class="post-tags">
-                      <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                      <li><i class="fa fa-user"></i>by <a href="#">John Doe</a></li>
-                      <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-                      <li><i class="fa fa-eye"></i>872</li>
-                    </ul>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.</p>
-                    <div class="rate-level">
-                      <p><span>8.0</span> Good</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="news-post image-post">
-              <div class="post-gallery">
-                <img src="upload/news-posts/h9.jpg" alt="">
-                <div class="hover-box">
-                  <div class="inner-hover">
-                    <a class="category-post" href="game-category.html">adventure</a>
-                    <h2><a href="single-post.html">Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. </a></h2>
-                    <ul class="post-tags">
-                      <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                      <li><i class="fa fa-user"></i>by <a href="#">John Doe</a></li>
-                      <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-                      <li><i class="fa fa-eye"></i>872</li>
-                    </ul>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.</p>
+                    <p>{{post.body}}</p>
                     <div class="rate-level">
                       <p><span>9.2</span> Amazing</p>
                     </div>
@@ -138,6 +42,7 @@
 </template>
 <script>
 export default {
+  props:['posts'],
   mounted() {
     try {
       var owlWrap = $('.owl-wrapper');

@@ -6,10 +6,7 @@
         <span class="breaking-news">breaking news</span>
         <span class="new-news">New</span>
         <ul id="js-news" class="js-hidden">
-          <li class="news-item"><span class="time-news">11:36 pm</span>  <a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</a> Donec odio. Quisque volutpat mattis eros... </li>
-          <li class="news-item"><span class="time-news">12:40 pm</span>  <a href="#">Dëshmitarja Abrashi: E kam parë Oliverin në turmë,</a> ndërsa neve na shpëtoi “çika Mille” </li>
-          <li class="news-item"><span class="time-news">11:36 pm</span>  <a href="#">Franca do të bashkëpunojë me Kosovën në fushën e shëndetësisë. </a></li>
-          <li class="news-item"><span class="time-news">01:00 am</span>  <a href="#">DioGuardi, kështu e mbrojti Kosovën në Washington, </a> para serbit Vejvoda </li>
+          <li v-for="item in news" :key="item.id"><span class="time-news">11:36 pm</span><a href="#">{{item.title}}</a></li>
         </ul>
       </div>
     </div>
@@ -18,6 +15,7 @@
 <script>
 
 export default {
+  props: ['news'],
 mounted() {
   try{
     $('#js-news').ticker({
