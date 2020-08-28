@@ -31,14 +31,7 @@
             <a class="navbar-brand" href="index.html"><img src="/images/logo.png" alt=""></a>
           </div>
 
-          <div class="advertisement">
-            <div class="desktop-advert">
-              <img src="/upload/addsense/468x60.jpg" alt="">
-            </div>
-            <div class="tablet-advert">
-              <img src="/upload/addsense/468x60.jpg" alt="">
-            </div>
-          </div>
+         <NavAdd />
         </div>
       </div>
       <!-- End Logo & advertisement -->
@@ -72,13 +65,15 @@ import NavSocial from "@/components/navigation/NavSocial";
 import NavReviews from "@/components/navigation/NavReviews"
 import NavTutorials from "@/components/navigation/NavTutorials"
 import NavSearch from "@/components/navigation/NavSearch"
+import NavAdd from "@/components/navigation/NavAdvertisement"
 
 export default {
   components: {
     NavSocial,
     NavReviews,
     NavTutorials,
-    NavSearch
+    NavSearch,
+    NavAdd
 
   },
   data(){
@@ -92,89 +87,50 @@ export default {
       return this.$store.getters.loadedPosts
     }
   },
-  created() {
+  beforeMount() {
     this.$store.dispatch('nuxtServerInit')
-  },
-  mounted() {
-    try {
-      var owlWrap = $('.owl-wrapper');
+  },updated: function () {
+    this.$nextTick(function () {
+      try {
+        var owlWrap = $('.owl-wrapper');
 
-      if (owlWrap.length > 0) {
+        if (owlWrap.length > 0) {
 
-        if (jQuery().owlCarousel) {
-          owlWrap.each(function(){
+          if (jQuery().owlCarousel) {
+            owlWrap.each(function(){
 
-            var carousel= $(this).find('.owl-carousel'),
-              dataNum = $(this).find('.owl-carousel').attr('data-num'),
-              dataNum2,
-              dataNum3;
+              var carousel= $(this).find('.owl-carousel'),
+                dataNum = $(this).find('.owl-carousel').attr('data-num'),
+                dataNum2,
+                dataNum3;
 
-            if ( dataNum == 1 ) {
-              dataNum2 = 1;
-              dataNum3 = 1;
-            } else if ( dataNum == 2 ) {
-              dataNum2 = 2;
-              dataNum3 = dataNum - 1;
-            } else {
-              dataNum2 = dataNum - 1;
-              dataNum3 = dataNum - 2;
-            }
+              if ( dataNum == 1 ) {
+                dataNum2 = 1;
+                dataNum3 = 1;
+              } else if ( dataNum == 2 ) {
+                dataNum2 = 2;
+                dataNum3 = dataNum - 1;
+              } else {
+                dataNum2 = dataNum - 1;
+                dataNum3 = dataNum - 2;
+              }
 
-            carousel.owlCarousel({
-              autoPlay: 10000,
-              navigation : true,
-              items : dataNum,
-              itemsDesktop : [1199,dataNum2],
-              itemsDesktopSmall : [979,dataNum3]
+              carousel.owlCarousel({
+                autoPlay: 10000,
+                navigation : true,
+                items : dataNum,
+                itemsDesktop : [1199,dataNum2],
+                itemsDesktopSmall : [979,dataNum3]
+              }).bind(this);
+
             });
-
-          });
-        }
-      }
-
-    } catch(err) {
-
-    }
-
-
-
-    /* ---------------------------------------------------------------------- */
-    /*	Header animate after scroll
-    /* ---------------------------------------------------------------------- */
-
-    (function() {
-
-      var docElem = document.documentElement,
-        didScroll = false,
-        changeHeaderOn = 300;
-      document.querySelector( 'header' );
-      function init() {
-        window.addEventListener( 'scroll', function() {
-          if( !didScroll ) {
-            didScroll = true;
-            setTimeout( scrollPage, 100 );
           }
-        }, false );
-      }
-
-      function scrollPage() {
-        var sy = scrollY();
-        if ( sy >= changeHeaderOn ) {
-          $( 'header' ).addClass('active');
         }
-        else {
-          $( 'header' ).removeClass('active');
-        }
-        didScroll = false;
+
+      } catch(err) {
+
       }
-
-      function scrollY() {
-        return window.pageYOffset || docElem.scrollTop;
-      }
-
-      init();
-
-    })();
+    })
   }
 
 
