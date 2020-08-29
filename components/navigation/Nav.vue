@@ -43,9 +43,9 @@
             <ul class="nav navbar-nav navbar-left">
 
               <li><nuxt-link to="/">Home</nuxt-link></li>
-              <li><nuxt-link to="/news">News</nuxt-link></li>
-              <NavReviews :reviews="updatedReviews" />
-              <NavTutorials />
+              <li><nuxt-link :to="{path: '/'+newsLink, params: { category: newsLink } }">News</nuxt-link></li>
+              <NavReviews :reviews="reviews" />
+              <NavTutorials :tutorials="tutorials" />
               <li><nuxt-link to="/authors">Authors</nuxt-link></li>
               <li><a href="game-category.html">Contact Us</a></li>
             </ul>
@@ -66,6 +66,7 @@ import NavReviews from "@/components/navigation/NavReviews"
 import NavTutorials from "@/components/navigation/NavTutorials"
 import NavSearch from "@/components/navigation/NavSearch"
 import NavAdd from "@/components/navigation/NavAdvertisement"
+import axios from "axios"
 
 export default {
   components: {
@@ -78,17 +79,27 @@ export default {
   },
   data(){
     return{
-      reviews: ''
+      reviews: '',
+      tutorials: '',
+      newsLink: 'news'
     }
 
   },
-  computed:{
-    updatedReviews(){
-      return this.$store.getters.loadedPosts
-    }
-  },
-  beforeMount() {
-    this.$store.dispatch('nuxtServerInit')
+  async mounted() {
+
+    let reviews = "https://jsonplaceholder.typicode.com/posts?_limit=5"
+    let tutorials = "https://jsonplaceholder.typicode.com/posts?_limit=5"
+    const requestOne = axios.get(reviews);
+    const requestTwo = axios.get(tutorials)
+    axios.all([requestOne, requestTwo]).then(axios.spread((...responses) => {
+      this.reviews = responses[0]
+      this.tutorials = responses[1]
+      // use/access the results
+    })).catch(errors => {
+      // react on errors.
+    })
+
+
   },updated: function () {
     this.$nextTick(function () {
       try {

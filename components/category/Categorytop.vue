@@ -7,7 +7,7 @@
           <div class="rate-level">
             <p><span>9.2</span> Amazing</p>
           </div>
-          <h2><nuxt-link to="/reviews/awesome-title">Awesome Title!</nuxt-link></h2>
+          <h2><nuxt-link :to="'/'+category+ '/awesome-title'">Awesome Title!</nuxt-link></h2>
           <ul class="post-tags">
             <li><i class="fa fa-clock-o"></i>27 may 2013</li>
             <li><i class="fa fa-user"></i>by <a href="#">John Doe</a></li>
@@ -55,3 +55,17 @@
     </div>
   </div>
 </template>
+<script>
+import Advertisement from '@/components/category/Categoryadvertisement'
+import Latest from '@/components/category/Categorylatest'
+import Title from '@/components/category/Categorytitle'
+import Top from '@/components/category/Categorytop'
+import Social from '@/components/side/Social'
+import Posts from '@/components/side/Sideposts'
+
+
+export default {
+  props: ['category']
+}
+
+</script>

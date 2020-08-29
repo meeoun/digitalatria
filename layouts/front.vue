@@ -1,23 +1,20 @@
 <template>
   <div>
     <Nav />
-
+    <nuxt />
     <section class="block-wrapper">
       <div class="container">
         <div class="row">
           <div class="col-sm-8">
-            <nuxt />
+            <TopStories :top="top"/>
           </div>
           <div class="col-sm-4">
-
-            <!-- sidebar -->
             <div class="sidebar">
               <Social />
-
               <SidePosts />
+
             </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -28,16 +25,34 @@
 <script>
 import Nav from '~/components/navigation/Nav'
 import Footer from '@/components/footer/Footer'
-import SidePosts from '@/components/side/Sideposts'
+import TopStories from '@/components/bottom/Topstories'
 import Social from '@/components/side/Social'
+import SidePosts from '@/components/side/Sideposts'
+import axios from "axios";
 export default {
-  components:{
+
+data(){
+  return{
+    top: ''
+  }
+},
+  components: {
     Nav,
     Footer,
+    Social,
     SidePosts,
-    Social
+    TopStories
+  }
+  , async mounted() {
+
+    let top = "https://jsonplaceholder.typicode.com/posts?_limit=6"
+    const requestOne = axios.get(top);
+    axios.all([requestOne]).then(axios.spread((...responses) => {
+      this.top = responses[0].data
+      // use/access the results
+    })).catch(errors => {
+      // react on errors.
+    })
   }
 }
 </script>
-
-

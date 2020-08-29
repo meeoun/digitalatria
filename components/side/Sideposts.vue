@@ -19,7 +19,7 @@
           <li v-for="item in popular" :key="item.id">
             <img src="/upload/news-posts/listw1.jpg" alt="">
             <div class="post-content">
-              <h2><a href="single-post.html">Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. </a></h2>
+              <h2><a href="single-post.html">{{item.title}} </a></h2>
               <ul class="post-tags">
                 <li><i class="fa fa-clock-o"></i>27 may 2013</li>
               </ul>
@@ -33,7 +33,7 @@
           <li v-for="item in recent" :key="item.id">
             <img src="/upload/news-posts/listw3.jpg" alt="">
             <div class="post-content">
-              <h2><a href="single-post.html">Phasellus ultrices nulla quis nibh. Quisque a lectus. </a></h2>
+              <h2><a href="single-post.html">{{item.title}} </a></h2>
               <ul class="post-tags">
                 <li><i class="fa fa-clock-o"></i>27 may 2013</li>
               </ul>
@@ -47,7 +47,7 @@
           <li v-for="item in recent" :key="item.id">
             <img src="/upload/news-posts/listw4.jpg" alt="">
             <div class="post-content">
-              <h2><a href="single-post.html">Donec consectetuer ligula vulputate sm tristique curss. </a></h2>
+              <h2><a href="single-post.html">{{item.title}} </a></h2>
               <ul class="post-tags">
                 <li><i class="fa fa-clock-o"></i>27 may 2013</li>
               </ul>
@@ -60,9 +60,33 @@
   </div>
 </template>
 <script>
-export default {
-  props: ['popular', 'recent', 'top']
+import axios from "axios";
 
+export default {
+  data(){
+    return{
+      popular: '',
+      recent: '',
+      top: ''
+    }
+
+  },
+  async mounted() {
+    let popular = "https://jsonplaceholder.typicode.com/posts?_limit=5"
+    let recent = "https://jsonplaceholder.typicode.com/posts?_limit=5"
+    let top = "https://jsonplaceholder.typicode.com/posts?_limit=5"
+    const requestOne = axios.get(popular)
+    const requestTwo = axios.get(recent)
+    const requestThree = axios.get(top)
+    axios.all([requestOne, requestTwo, requestThree]).then(axios.spread((...responses) => {
+      this.popular = responses[0].data
+      this.recent = responses[1].data
+      this.top = responses[2].data
+      // use/access the results
+    })).catch(errors => {
+      // react on errors.
+    })
+  }
 }
 
 </script>

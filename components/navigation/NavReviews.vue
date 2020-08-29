@@ -1,5 +1,5 @@
 <template>
-  <li class="drop-arrow"><nuxt-link to="/reviews">Reviews</nuxt-link>
+  <li class="drop-arrow"><nuxt-link :to="{path: '/'+reviewLink, params: { category: reviewLink } }">Reviews</nuxt-link>
     <div class="megadropdown">
       <div class="container">
         <div class="inner-megadropdown">
@@ -33,6 +33,11 @@
 </template>
 <script>
 export default {
-  props: ['reviews']
+  props: ['reviews'],
+  data() {
+    return {
+      reviewLink: 'reviews'
+    }
+  }
 }
 </script>
