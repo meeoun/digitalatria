@@ -18,10 +18,9 @@ export default {
     path: function (){
       return this.$route.fullPath.substring(1)
     }
-  },async validate(){
-    let test =["reviews", "tutorials", "news"]
-    console.log(this.path)
-    return test.includes("reviews");
+  },async validate({ params }){
+    let allowed =["reviews", "tutorials", "news"]
+    return allowed.includes(params.category);
   }
 }
 </script>

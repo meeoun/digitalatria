@@ -43,11 +43,15 @@
             <ul class="nav navbar-nav navbar-left">
 
               <li><nuxt-link to="/">Home</nuxt-link></li>
-              <li><nuxt-link :to="{path: '/'+newsLink, params: { category: newsLink } }">News</nuxt-link></li>
+              <li><nuxt-link to="/news">News</nuxt-link></li>
+              <li class="drop-arrow"><nuxt-link to="/reviews">Reviews</nuxt-link>
               <NavReviews :reviews="reviews" />
+              </li>
+              <li class="drop-arrow"><nuxt-link to="/tutorials">Tutorials</nuxt-link>
               <NavTutorials :tutorials="tutorials" />
+              </li>
               <li><nuxt-link to="/authors">Authors</nuxt-link></li>
-              <li><a href="game-category.html">Contact Us</a></li>
+              <li><nuxt-link to="/contact">Contact Us</nuxt-link></li>
             </ul>
           <NavSearch />
           </div>
@@ -81,7 +85,8 @@ export default {
     return{
       reviews: '',
       tutorials: '',
-      newsLink: 'news'
+      newsLink: 'news',
+      reviewsLink:'reviews'
     }
 
   },

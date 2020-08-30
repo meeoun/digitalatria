@@ -91,6 +91,9 @@ export default {
   pageTransition:{
     name: 'fade',
     mode: 'out-in'
+  },
+  router: {
+    linkExactActiveClass: 'active'
   }
 
 }
