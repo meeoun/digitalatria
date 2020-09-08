@@ -1,6 +1,10 @@
 
 export default {
 
+  publicRuntimeConfig: {
+    baseURL: 'http://localhost'
+  },
+
   /*
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
@@ -32,6 +36,7 @@ export default {
       {rel: 'stylesheet', href: '/css/owl.theme.css'},
       {rel: 'stylesheet', href: '/css/ticker-style.css'},
       {rel: 'stylesheet', href: '/css/style.css'},
+      {rel: 'stylesheet', href: '/css/tocbot.css'}
 
     ],
     script: [
@@ -45,6 +50,7 @@ export default {
       {src: '/js/jquery.isotope.min.js', body: true},
       {src: '/js/owl.carousel.min.js', body: true},
       {src: '/js/retina-1.1.0.min.js', body: true},
+      {src: '/js/tocbot.min.js', body: true}
 
     ]
   },

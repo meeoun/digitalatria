@@ -5,9 +5,11 @@
           <div class="block-content">
             <div class="single-post-box">
               <Title :post=post />
+
               <Sharepost />
-              <Postgallery />
-              <Post />
+              <PostCarousel :postID="post.id" :caption="post.gallery_caption" />
+              <Post :content="post.content" />
+              <PostGallery :postID="post.id"  />
 
             </div>
           </div>
@@ -16,41 +18,28 @@
 <script>
 import Title from '@/components/post/Title'
 import Sharepost from '@/components/post/Sharepost'
-import Postgallery from '@/components/post/Postgallery'
+import PostCarousel from '@/components/post/PostCarousel'
 import Post from '@/components/post/Postdata'
+import PostGallery from '@/components/post/PostGallery'
 
 
 export default {
-  props: ['post'],
+  props: {
+    post: {
+      type: Object,
+      default: null,
+      required: true
+    }
+  },
   components:{
     Title,
     Sharepost,
-    Postgallery,
-    Post
+    PostCarousel,
+    Post,
+    PostGallery
   }
   , mounted() {
-    try {
-      $('.bxslider').bxSlider({
-        mode: 'fade',
-        auto: true
-      });
 
-      $('.big-bxslider').bxSlider({
-        mode: 'horizontal',
-        auto: true
-      });
-
-      $('.slider-call').bxSlider({
-        pagerCustom: '#bx-pager'
-      });
-
-      $('.slider-call2').bxSlider({
-        pagerCustom: '#bx-pager2'
-      });
-
-
-    } catch(err) {
-    }
 
   }
 }

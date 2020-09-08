@@ -18,12 +18,17 @@ export default {
   },
   components: {
     Post,
-  },async asyncData(){
+  },async asyncData({error, params}) {
     const [post] = await Promise.all([
-      axios.get('https://jsonplaceholder.typicode.com/posts?_limit=1'),
+      axios.get(`http://localhost/api/posts?slug=${params.slug}`),
     ])
-    return{
-      post: post.data[0],
+    if(post.data.data.data.length === 0)
+    {
+      error({statusCode: 404, message: "The server successfully processed the request and is not returning any content."})
+    }
+
+    return {
+      post: post.data.data.data[0],
     }
 
   }

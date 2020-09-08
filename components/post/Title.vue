@@ -1,6 +1,6 @@
 <template>
   <div class="title-post">
-    <h1>{{post.title}}</h1>
+    <h1>{{ post.title }}</h1>
     <ul class="post-tags">
       <li><i class="fa fa-clock-o"></i>27 may 2013</li>
       <li><i class="fa fa-user"></i>by <a href="#">John Doe</a></li>
@@ -12,7 +12,11 @@
 <script>
 
 export default {
-  props: ['post'],
-
+  props: {
+    post: {
+      type: Object,
+      default: null
+    }
+  },
 }
 </script>
