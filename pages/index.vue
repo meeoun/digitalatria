@@ -1,7 +1,7 @@
 <template>
   <div>
     <Ticker :news="news" />
-    <Headingnews :posts="reviews" />
+    <HeadingNews :posts="reviews" />
     <Latestnews />
   </div>
 </template>
@@ -9,16 +9,15 @@
 <script>
 
 import Ticker from '~/components/news/Ticker';
-import Headingnews from '~/components/news/Headingnews';
+import HeadingNews from '~/components/news/HeadingNews';
 import Latestnews from '~/components/news/Latestnews';
 import axios from "axios";
-import error from "@/layouts/error";
 
 export default {
   layout: 'front',
   components: {
     Ticker,
-    Headingnews,
+    HeadingNews,
     Latestnews
   },
   data(){
@@ -30,13 +29,13 @@ export default {
   },
   async asyncData({$config: { baseURL}}){
     const [news, reviews, top] = await Promise.all([
-      axios.get(`${baseURL}/api/posts?published_at ne null&sort_by eq published_at&desc&type eq news&limit 10`),
-      axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10'),
+      axios.get(`${baseURL}/api/posts?published_at!=null&sort_by!=published_at&limit=10&type=news`),
+      axios.get(`${baseURL}/api/posts?published_at!=null&sort_by!=published_at&limit=10&type=reviews`),
       axios.get('https://jsonplaceholder.typicode.com/posts?_limit=6'),
     ])
     return{
       news: news.data.data.data,
-      reviews: reviews.data,
+      reviews: reviews.data.data.data,
       top: top.data,
     }
 

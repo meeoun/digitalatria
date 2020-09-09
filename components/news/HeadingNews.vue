@@ -12,16 +12,15 @@
           <div v-for="post in posts" :key="post.id" class="item">
             <div class="news-post image-post">
               <div class="post-gallery">
-                <img src="/upload/news-posts/h9.jpg" alt="">
+                <img :src=$config.baseURL+post.front_page_carousel.url :alt=post.front_page_carousel.name>
                 <div class="hover-box">
                   <div class="inner-hover">
-                    <a class="category-post" href="game-category.html">adventure</a>
-                    <h2><a href="single-post.html">{{post.title}}</a></h2>
+                    <nuxt-link class="category-post" :to="'/'+post.type+'/'">{{post.type}}</nuxt-link>
+                    <h2><nuxt-link :to="'/'+post.type+'/'+post.slug">{{post.title}}</nuxt-link></h2>
                     <ul class="post-tags">
-                      <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                      <li><i class="fa fa-user"></i>by <a href="#">John Doe</a></li>
-                      <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-                      <li><i class="fa fa-eye"></i>872</li>
+                      <li><i class="fa fa-clock-o"></i>{{post.publish_date}}</li>
+                      <li><i class="fa fa-user"></i>by <a href="#">{{post.author.name}}</a></li>
+                      <li><i class="fa fa-eye"></i>{{post.views}}</li>
                     </ul>
                     <p>{{post.body}}</p>
                     <div class="rate-level">
@@ -44,7 +43,7 @@
 export default {
   props:['posts'],
   mounted() {
-
+    console.log(this.posts[0])
   }
 }
 </script>

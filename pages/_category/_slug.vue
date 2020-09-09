@@ -20,7 +20,7 @@ export default {
     Post,
   },async asyncData({error, params}) {
     const [post] = await Promise.all([
-      axios.get(`http://localhost/api/posts?slug=${params.slug}`),
+      axios.get(`http://localhost/api/posts?type=${params.category}&slug=${params.slug}`),
     ])
     if(post.data.data.data.length === 0)
     {
