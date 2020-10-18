@@ -6,7 +6,7 @@
         <span class="breaking-news">breaking news</span>
         <span class="new-news">New</span>
         <ul id="js-news" class="js-hidden">
-          <li v-for="item in news" :key="item.id"><span class="time-news">{{ item.publish_time }}</span><nuxt-link :to="'/news/'+item.slug">{{item.title}}</nuxt-link></li>
+          <li v-for="item in news" :key="item.id"><span class="time-news">{{ item.dates.created}}</span><nuxt-link :to="'/news/'+item.slug">{{item.title}}</nuxt-link></li>
         </ul>
       </div>
     </div>

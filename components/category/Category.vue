@@ -1,17 +1,14 @@
 <template>
-
           <!-- block content -->
           <div class="block-content">
-
             <!-- grid box -->
             <div class="grid-box">
               <Title :category=category />
-              <Top :category=category />
+              <Top :posts=posts />
               <Advertisement />
-              <Latest />
+              <Latest :posts="posts" />
             </div>
           </div>
-
 </template>
 
 <script>
@@ -24,7 +21,7 @@ import Posts from '@/components/side/Sideposts'
 
 
 export default {
-  props: ['category'],
+  props: ['category', 'posts'],
   components:{
     Top,
     Title,

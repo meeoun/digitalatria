@@ -92,13 +92,13 @@ export default {
   },
   async mounted() {
 
-    let reviews = "https://jsonplaceholder.typicode.com/posts?_limit=5"
-    let tutorials = "https://jsonplaceholder.typicode.com/posts?_limit=5"
+    let reviews = `${this.$config.baseURL}/api/posts?published_at!=null&orderby!=published_at&limit=5&assets&type=reviews`
+    let tutorials = `${this.$config.baseURL}/api/posts?published_at!=null&orderby!=published_at&limit=5&assets&type=tutorials`
     const requestOne = axios.get(reviews);
     const requestTwo = axios.get(tutorials)
     axios.all([requestOne, requestTwo]).then(axios.spread((...responses) => {
-      this.reviews = responses[0]
-      this.tutorials = responses[1]
+      this.reviews = responses[0].data.data
+      this.tutorials = responses[1].data.data
       // use/access the results
     })).catch(errors => {
       // react on errors.

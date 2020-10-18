@@ -16,12 +16,12 @@
     <div class="tab-content">
       <div class="tab-pane active" id="option1">
         <ul class="list-posts">
-          <li v-for="item in popular" :key="item.id">
-            <img src="/upload/news-posts/listw1.jpg" alt="">
+          <li v-for="post in popular" :key="post.id">
+            <img :src=post.images.main.dimension_80_70.url :alt=post.images.main.dimension_80_70.name>
             <div class="post-content">
-              <h2><a href="single-post.html">{{item.title}} </a></h2>
+              <h2><nuxt-link :to="'/'+post.type+'/'+post.slug">{{ post.title}}</nuxt-link></h2>
               <ul class="post-tags">
-                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
+                <li><i class="fa fa-clock-o"></i>{{post.dates.created}}</li>
               </ul>
             </div>
           </li>
@@ -30,12 +30,12 @@
       </div>
       <div class="tab-pane" id="option2">
         <ul class="list-posts">
-          <li v-for="item in recent" :key="item.id">
-            <img src="/upload/news-posts/listw3.jpg" alt="">
+          <li v-for="post in recent" :key="post.id">
+            <img :src=post.images.main.dimension_80_70.url :alt=post.images.main.dimension_80_70.name>
             <div class="post-content">
-              <h2><a href="single-post.html">{{item.title}} </a></h2>
+              <h2><nuxt-link :to="'/'+post.type+'/'+post.slug">{{ post.title}}</nuxt-link></h2>
               <ul class="post-tags">
-                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
+                <li><i class="fa fa-clock-o"></i>{{post.dates.created}}</li>
               </ul>
             </div>
           </li>
@@ -44,12 +44,12 @@
       </div>
       <div class="tab-pane" id="option3">
         <ul class="list-posts">
-          <li v-for="item in recent" :key="item.id">
-            <img src="/upload/news-posts/listw4.jpg" alt="">
+          <li v-for="post in top" :key="post.id">
+            <img :src=post.images.main.dimension_80_70.url :alt=post.images.main.dimension_80_70.name>
             <div class="post-content">
-              <h2><a href="single-post.html">{{item.title}} </a></h2>
+              <h2><nuxt-link :to="'/'+post.type+'/'+post.slug">{{ post.title}}</nuxt-link></h2>
               <ul class="post-tags">
-                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
+                <li><i class="fa fa-clock-o"></i>{{post.dates.created}}</li>
               </ul>
             </div>
           </li>
@@ -72,16 +72,16 @@ export default {
 
   },
   async mounted() {
-    let popular = "https://jsonplaceholder.typicode.com/posts?_limit=5"
-    let recent = "https://jsonplaceholder.typicode.com/posts?_limit=5"
-    let top = "https://jsonplaceholder.typicode.com/posts?_limit=5"
+    let popular = `${this.$config.baseURL}/api/posts?published_at!=null&sort_by!=views&limit=5&assets`
+    let recent = `${this.$config.baseURL}/api/posts?published_at!=null&sort_by!=published_at&limit=5&assets`
+    let top = `${this.$config.baseURL}/api/posts?published_at!=null&sort_by!=views&limit=5&type=news&assets`
     const requestOne = axios.get(popular)
     const requestTwo = axios.get(recent)
     const requestThree = axios.get(top)
     axios.all([requestOne, requestTwo, requestThree]).then(axios.spread((...responses) => {
-      this.popular = responses[0].data
-      this.recent = responses[1].data
-      this.top = responses[2].data
+      this.popular = responses[0].data.data
+      this.recent = responses[1].data.data
+      this.top = responses[2].data.data
       // use/access the results
     })).catch(errors => {
       // react on errors.

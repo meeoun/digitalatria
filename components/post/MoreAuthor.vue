@@ -83,3 +83,14 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    author: {
+      type: Object,
+      default: null,
+      required: true
+    }
+  }
+}
+</script>

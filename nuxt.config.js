@@ -50,7 +50,8 @@ export default {
       {src: '/js/jquery.isotope.min.js', body: true},
       {src: '/js/owl.carousel.min.js', body: true},
       {src: '/js/retina-1.1.0.min.js', body: true},
-      {src: '/js/tocbot.min.js', body: true}
+      {src: '/js/tocbot.min.js', body: true},
+      {src: '/js/main.js', body: true}
 
     ]
   },

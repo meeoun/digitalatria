@@ -1,17 +1,15 @@
 <template>
   <div>
     <Nav />
-
     <section class="block-wrapper">
-
       <div class="col-md-1" style="margin-top: 90px">
         <div style="position: fixed" >
-          <div class="js-toc"></div>
+          <div class="js-toc" style="max-width: 240px;"></div>
         </div>
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-sm-8 js-toc-content">
+          <div class="col-sm-8">
             <nuxt />
           </div>
           <div class="col-sm-4">
@@ -44,18 +42,6 @@ export default {
     Footer,
     SidePosts,
     Social
-  },mounted() {
-    tocbot.init({
-      // Where to render the table of contents.
-      tocSelector: '.js-toc',
-      // Where to grab the headings to build the table of contents.
-      contentSelector: '.js-toc-content',
-      // Which headings to grab inside of the contentSelector element.
-      headingSelector: 'h1, h2, h3',
-      // For headings inside relative or absolute positioned containers within content.
-      hasInnerContainers: true,
-
-    })
   }
 
 }

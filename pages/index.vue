@@ -1,8 +1,12 @@
 <template>
   <div>
+
     <Ticker :news="news" />
+
     <HeadingNews :posts="reviews" />
-    <Latestnews />
+
+    <Latestnews :posts="latest" />
+
   </div>
 </template>
 
@@ -24,21 +28,21 @@ export default {
     return{
       news: '',
       reviews: '',
-      top: ''
+      latest: ''
     }
   },
-  async asyncData({$config: { baseURL}}){
-    const [news, reviews, top] = await Promise.all([
+  async asyncData({$config: { baseURL }}){
+    const [news, reviews, latest, top] = await Promise.all([
       axios.get(`${baseURL}/api/posts?published_at!=null&sort_by!=published_at&limit=10&type=news`),
       axios.get(`${baseURL}/api/posts?published_at!=null&sort_by!=published_at&limit=10&type=reviews`),
-      axios.get('https://jsonplaceholder.typicode.com/posts?_limit=6'),
+      axios.get(`${baseURL}/api/posts?published_at!=null&sort_by!=published_at&limit=10&type=tutorials`)
     ])
     return{
-      news: news.data.data.data,
-      reviews: reviews.data.data.data,
-      top: top.data,
+      news: news.data.data,
+      reviews: reviews.data.data,
+      latest: latest.data.data
     }
 
-  },
+  }
 }
 </script>

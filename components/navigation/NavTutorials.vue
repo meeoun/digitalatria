@@ -6,18 +6,15 @@
           <div class="owl-wrapper">
             <div class="owl-carousel" data-num="5">
 
-              <div v-for="item in tutorials" :key="item.id" class="item news-post standard-post">
+              <div v-for="post in tutorials" :key="post.id" class="item news-post standard-post">
                 <div class="post-gallery">
-                  <img src="/upload/news-posts/st1.jpg" alt="">
-                  <div class="rate-level">
-                    <p><span>7.4</span> Good</p>
-                  </div>
+                  <img :src=post.images.main.dimension_270_200.url :alt=post.images.main.dimension_270_200.name>
                 </div>
                 <div class="post-content">
-                  <h2><a href="single-post.html">Donec odio. Quisque volutpat mattis eros. </a></h2>
+                  <h2><nuxt-link :to="'/'+post.type+'/'+post.slug">{{post.title}}</nuxt-link></h2>
                   <ul class="post-tags">
-                    <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                    <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
+                    <li><i class="fa fa-clock-o"></i>{{post.dates.created}}</li>
+                    <li><i class="fa fa-comments-o"></i><span>{{post.views}}</span></li>
                   </ul>
                 </div>
               </div>

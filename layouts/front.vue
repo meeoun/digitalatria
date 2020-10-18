@@ -44,15 +44,6 @@ data(){
     TopStories
   }
   , async mounted() {
-
-    let top = "https://jsonplaceholder.typicode.com/posts?_limit=6"
-    const requestOne = axios.get(top);
-    axios.all([requestOne]).then(axios.spread((...responses) => {
-      this.top = responses[0].data
-      // use/access the results
-    })).catch(errors => {
-      // react on errors.
-    })
   }
 }
 </script>

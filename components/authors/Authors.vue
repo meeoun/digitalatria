@@ -8,22 +8,29 @@
                 <h1><span>Author List</span></h1>
               </div>
 
-              <ul class="autor-list">
-                <Authors />
-              </ul>
+
+                <AuthorList :authors=authors />
+
             </div>
 
 
           </div>
 </template>
 <script>
-import Authors from '@/components/authors/Authorlist'
+import AuthorList from '@/components/authors/Authorlist'
 import Social from '@/components/side/Social'
 import Posts from '@/components/side/Sideposts'
 
 export default {
+  props: {
+    authors: {
+      type: Array,
+      default: null,
+      required: true
+    }
+  },
   components:{
-    Authors,
+    AuthorList,
     Social,
     Posts
   }

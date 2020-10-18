@@ -4,3 +4,17 @@
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
+
+@media screen and (max-width: 1600px) {
+  div.js-toc {
+    display: none;
+  }
+}
+
+.js-toc{
+  padding-left: 10px;
+}
+
+.toc-list{
+  padding-left: 15px;
+}

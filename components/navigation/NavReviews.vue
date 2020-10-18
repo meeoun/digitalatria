@@ -6,18 +6,18 @@
           <div class="owl-wrapper">
             <div class="owl-carousel" data-num="5">
 
-              <div v-for="review in reviews" :key="review.id" class="item news-post standard-post">
+              <div v-for="post in reviews" :key="post.id" class="item news-post standard-post">
                 <div class="post-gallery">
-                  <img src="/upload/news-posts/st1.jpg" alt="">
+                  <img :src=post.images.main.dimension_270_200.url :alt=post.images.main.dimension_270_200.name>
                   <div class="rate-level">
-                    <p><span>7.4</span> Good</p>
+                    <p><span>{{post.average_score}}</span>{{post.score_description}}</p>
                   </div>
                 </div>
                 <div class="post-content">
-                  <h2><a href="single-post.html"> testing</a></h2>
+                  <h2><nuxt-link :to="'/'+post.type+'/'+post.slug">{{post.title}}</nuxt-link></h2>
                   <ul class="post-tags">
-                    <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                    <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
+                    <li><i class="fa fa-clock-o"></i>{{post.dates.created}}</li>
+                    <li><i class="fa fa-comments-o"></i><span>{{post.comments}}</span></li>
                   </ul>
                 </div>
               </div>

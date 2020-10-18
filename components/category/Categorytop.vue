@@ -1,53 +1,50 @@
 <template>
   <div class="category-posts-head">
-    <div class="news-post image-post">
-      <img src="/upload/news-posts/im1.jpg" alt="">
+    <div class="news-post image-post" v-if="posts[0]">
+      <img :src=posts[0].images.banner.dimension_770_310.url :alt=posts[0].images.banner.dimension_770_310.name>
       <div class="hover-box">
         <div class="inner-hover">
-          <div class="rate-level">
-            <p><span>9.2</span> Amazing</p>
+          <div class="rate-level" v-if="posts[0].type === 'reviews'">
+            <p><span>{{posts[0].average_score}}</span> {{posts[0].score_description}}</p>
           </div>
-          <h2><nuxt-link :to="'/'+category+ '/awesome-title'">Awesome Title!</nuxt-link></h2>
+          <h2><nuxt-link :to="'/'+posts[0].type+'/'+posts[0].slug">{{posts[0].title}}</nuxt-link></h2>
           <ul class="post-tags">
-            <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-            <li><i class="fa fa-user"></i>by <a href="#">John Doe</a></li>
-            <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-            <li><i class="fa fa-eye"></i>872</li>
+            <li><i class="fa fa-clock-o"></i>{{posts[0].dates.created}}</li>
+            <li><i class="fa fa-user"></i>by <a href="#">{{posts[0].author.name}}</a></li>
+            <li><i class="fa fa-eye"></i>{{posts[0].views}}</li>
           </ul>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
-        <div class="news-post image-post">
-          <img src="/upload/news-posts/im2.jpg" alt="">
+        <div class="news-post image-post" v-if="posts[1]">
+          <img :src=posts[1].images.main.dimension_380_250.url :alt=posts[1].images.main.dimension_380_250.name>
           <div class="hover-box">
             <div class="inner-hover">
-              <h2><a href="single-post.html">Donec nec justo eget felis facilisis </a></h2>
+              <h2><nuxt-link :to="'/'+posts[1].type+'/'+posts[1].slug">{{posts[1].title}}</nuxt-link></h2>
               <ul class="post-tags">
-                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                <li><i class="fa fa-user"></i>by <a href="#">John Doe</a></li>
-                <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-                <li><i class="fa fa-eye"></i>872</li>
+                <li><i class="fa fa-clock-o"></i>{{posts[1].dates.created}}</li>
+                <li><i class="fa fa-user"></i>by <a href="#">{{posts[1].author.name}}</a></li>
+                <li><i class="fa fa-eye"></i>{{posts[1].comments}}</li>
               </ul>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. </p>
+              <p>{{posts[1].excerpt}} </p>
             </div>
           </div>
         </div>
       </div>
       <div class="col-md-6">
-        <div class="news-post image-post">
-          <img src="/upload/news-posts/im3.jpg" alt="">
+        <div class="news-post image-post" v-if="posts[2]">
+          <img :src=posts[2].images.main.dimension_380_250.url :alt=posts[2].images.main.dimension_380_250.name>
           <div class="hover-box">
             <div class="inner-hover">
-              <h2><a href="single-post.html">Aliquam porttitor mauris sit amet orci. Aenean dignissim</a></h2>
+              <h2><nuxt-link :to="'/'+posts[2].type+'/'+posts[2].slug">{{posts[2].title}}</nuxt-link></h2>
               <ul class="post-tags">
-                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                <li><i class="fa fa-user"></i>by <a href="#">John Doe</a></li>
-                <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-                <li><i class="fa fa-eye"></i>872</li>
+                <li><i class="fa fa-clock-o"></i>{{posts[2].dates.created}}</li>
+                <li><i class="fa fa-user"></i>by <a href="#">{{posts[2].author.name}}</a></li>
+                <li><i class="fa fa-eye"></i>{{posts[2].comments}}</li>
               </ul>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. </p>
+              <p>{{posts[2].excerpt}} </p>
             </div>
           </div>
         </div>
@@ -56,16 +53,10 @@
   </div>
 </template>
 <script>
-import Advertisement from '@/components/category/Categoryadvertisement'
-import Latest from '@/components/category/Categorylatest'
-import Title from '@/components/category/Categorytitle'
-import Top from '@/components/category/Categorytop'
-import Social from '@/components/side/Social'
-import Posts from '@/components/side/Sideposts'
-
 
 export default {
-  props: ['category']
+  props: ['posts'],
+
 }
 
 </script>

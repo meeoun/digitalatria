@@ -1,9 +1,9 @@
 <template>
-  <li>
-
+  <ul class="autor-list">
+  <li v-for="author in authors" :key="author.id" >
     <div class="autor-box">
 
-      <img src="/upload/users/avatar1.jpg" alt="">
+      <img :src=author.image :alt=author.name>
 
       <div class="autor-content">
 
@@ -38,6 +38,32 @@
       </ul>
       <a href="#" class="autor-site">http://www.janesmith.com</a>
     </div>
-
   </li>
+  </ul>
 </template>
+<script>
+
+
+export default {
+  props: {
+    authors: {
+      type: Array,
+      default: null,
+      required: true
+    }
+  },methods:{
+    onScroll ({ target: { scrollTop, clientHeight, scrollHeight }}) {
+      if (scrollTop + clientHeight >= scrollHeight) {
+        console.log("at bottom")
+      }
+      console.log("in function")
+    }
+  },created () {
+    //window.addEventListener('scroll', this.onScroll);
+  },
+  destroyed () {
+   // window.removeEventListener('scroll', this.onScroll);
+  }
+
+}
+</script>

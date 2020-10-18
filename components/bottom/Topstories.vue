@@ -8,31 +8,31 @@
       <h1><span>Top Articles</span></h1>
     </div>
 
-    <div class="news-post standard-post2">
+    <div v-for="index in 1" :key="index"  class="news-post standard-post2" v-if="posts">
       <div class="post-gallery">
-        <img src="/upload/news-posts/1.jpg" alt="">
-        <div class="rate-level">
-          <p><span>9.5</span> Amazing</p>
+        <img :src=posts[index].images.banner.dimension_770_200.url :alt=posts[index].images.banner.dimension_770_200.name>
+        <div class="rate-level" v-if="posts[index] === 'type'">
+          <p><span>{{posts[index].average_score}}</span>{{posts[index].score_description}}</p>
         </div>
       </div>
-      <div v-for="index in 1" :key="index" class="post-title" v-if="posts">
-        <h2><a href="single-post.html">{{ posts[index].title}}</a></h2>
+      <div class="post-title">
+        <h2><nuxt-link :to="'/'+posts[index].type+'/'+posts[index].slug">{{ posts[index].title}}</nuxt-link></h2>
         <ul class="post-tags">
-          <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-          <li><i class="fa fa-user"></i>by <a href="#">John Doe</a></li>
-          <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
+          <li><i class="fa fa-clock-o"></i>{{posts[index].dates.created}}</li>
+          <li><i class="fa fa-user"></i>by <a href="#">{{posts[index].author.name}}</a></li>
         </ul>
       </div>
     </div>
+
     <div class="row">
       <div class="col-md-6">
         <ul class="list-posts">
           <li v-for="index in 3" :key="index" v-if="posts[index]">
-            <img src="/upload/news-posts/list1.jpg" alt="">
+            <img :src=posts[index].images.main.dimension_100_80.url :alt=posts[index].images.main.dimension_100_80.name>
             <div class="post-content">
-              <h2><a href="single-post.html">{{posts[index].title}}</a></h2>
+              <h2><nuxt-link :to="'/'+posts[index].type+'/'+posts[index].slug">{{ posts[index].title}}</nuxt-link></h2>
               <ul class="post-tags">
-                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
+                <li><i class="fa fa-clock-o"></i>{{posts[index].dates.created}}</li>
               </ul>
             </div>
           </li>
@@ -40,12 +40,12 @@
       </div>
       <div class="col-md-6">
         <ul class="list-posts">
-          <li v-for="index in 3":key="index" v-if="posts[index+2]">
-            <img src="/upload/news-posts/list4.jpg" alt="">
+          <li v-for="index in 3" :key="index" v-if="posts[index+2]">
+            <img :src=posts[index+2].images.main.dimension_100_80.url :alt=posts[index+2].images.main.dimension_100_80.name>
             <div class="post-content">
-              <h2><a href="single-post.html">{{posts[index+2].title}} </a></h2>
+              <h2><nuxt-link :to="'/'+posts[index+2].type+'/'+posts[index+2].slug">{{ posts[index+2].title}}</nuxt-link></h2>
               <ul class="post-tags">
-                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
+                <li><i class="fa fa-clock-o"></i>{{posts[index+2].dates.created}}</li>
               </ul>
             </div>
           </li>
@@ -66,10 +66,10 @@ export default {
     }
   },
   mounted() {
-    let top = "https://jsonplaceholder.typicode.com/posts?_limit=6"
+    let top = `${this.$config.baseURL}/api/posts?published_at!=null&sort_by!=views&limit=10&assets`
     const requestOne = axios.get(top);
     axios.all([requestOne]).then(axios.spread((...responses) => {
-      this.posts = responses[0].data
+      this.posts = responses[0].data.data
       // use/access the results
     })).catch(errors => {
       // react on errors.
