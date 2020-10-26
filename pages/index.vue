@@ -15,7 +15,8 @@
 import Ticker from '~/components/news/Ticker';
 import HeadingNews from '~/components/news/HeadingNews';
 import Latestnews from '~/components/news/Latestnews';
-import axios from "axios";
+import { mapState } from 'vuex'
+
 
 export default {
   layout: 'front',
@@ -24,25 +25,16 @@ export default {
     HeadingNews,
     Latestnews
   },
-  data(){
-    return{
-      news: '',
-      reviews: '',
-      latest: ''
-    }
-  },
-  async asyncData({$config: { baseURL }}){
-    const [news, reviews, latest, top] = await Promise.all([
-      axios.get(`${baseURL}/api/posts?published_at!=null&sort_by!=published_at&limit=10&type=news`),
-      axios.get(`${baseURL}/api/posts?published_at!=null&sort_by!=published_at&limit=10&type=reviews`),
-      axios.get(`${baseURL}/api/posts?published_at!=null&sort_by!=published_at&limit=10&type=tutorials`)
-    ])
-    return{
-      news: news.data.data,
-      reviews: reviews.data.data,
-      latest: latest.data.data
-    }
+  async fetch({store, error}){
+    await store.dispatch('posts/fetchNews');
+    await store.dispatch('posts/fetchReviews');
+    await store.dispatch('posts/fetchLatest');
 
-  }
+  },
+  computed: mapState({
+    news: state => state.posts.news,
+    reviews: state => state.posts.reviews,
+    latest: state => state.posts.latest
+  })
 }
 </script>

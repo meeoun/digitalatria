@@ -7,30 +7,26 @@
 <script>
 
 import Post from '~/components/post/Post'
-import axios from "axios";
-
+import { mapState } from 'vuex'
 
 export default {
-  data(){
-    return {
-      post: ''
-    }
-  },
   components: {
     Post,
-  },async asyncData({$config: {baseURL}, error, params}) {
-    const [post] = await Promise.all([
-      axios.get(`${baseURL}/api/posts?type=${params.category}&slug=${params.slug}`),
-    ])
-    if(post.data.data.length === 0)
-    {
-      error({statusCode: 404, message: "The server successfully processed the request and is not returning any content."})
-    }
-    return {
-      post: post.data.data[0],
-    }
+  },
+  async fetch({store, error, params}) {
 
-  },mounted() {
+    try {
+      await store.dispatch('posts/fetchPost', params)
+    }catch (e) {
+      error({
+        statusCode: 404,
+        message: 'Unable to fetch post'
+      })
+    }
+  },computed: mapState({
+    post: state => state.posts.post
+  })
+  ,mounted() {
     tocbot.init({
       // Where to render the table of contents.
       tocSelector: '.js-toc',

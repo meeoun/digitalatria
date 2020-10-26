@@ -1,3 +1,4 @@
+
 <template>
   <div class="comment-area-box">
     <div class="title-section">
@@ -8,7 +9,7 @@
         <div class="comment-box">
           <img :alt=comment.user.name :src=comment.user.image>
           <div class="comment-content">
-            <h4>{{comment.user.name}}<a href="#"><i class="fa fa-comment-o"></i>Reply</a></h4>
+            <h4>{{comment.user.name}}<CommentReply :comment="comment" /> </h4>
             <span><i class="fa fa-clock-o"></i>{{comment.dates.created}}</span>
             <p>{{comment.body}}</p>
           </div>
@@ -28,8 +29,11 @@
       </li>
     </ul>
   </div>
+
 </template>
 <script>
+import CommentReply from "@/components/comments/CommentReply"
+
 export default {
   props: {
     count:{
@@ -42,9 +46,8 @@ export default {
       default: null,
       required: true
     }
+  },components:{
+    CommentReply
   },
-  mounted() {
-    console.log(this.comments[0].replies)
-  }
 }
 </script>

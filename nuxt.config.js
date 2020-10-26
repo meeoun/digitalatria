@@ -36,7 +36,7 @@ export default {
       {rel: 'stylesheet', href: '/css/owl.theme.css'},
       {rel: 'stylesheet', href: '/css/ticker-style.css'},
       {rel: 'stylesheet', href: '/css/style.css'},
-      {rel: 'stylesheet', href: '/css/tocbot.css'}
+      {rel: 'stylesheet', href: '/css/tocbot.css'},
 
     ],
     script: [
@@ -51,7 +51,7 @@ export default {
       {src: '/js/owl.carousel.min.js', body: true},
       {src: '/js/retina-1.1.0.min.js', body: true},
       {src: '/js/tocbot.min.js', body: true},
-      {src: '/js/main.js', body: true}
+      {src: '/js/main.js', body: true},
 
     ]
   },
@@ -59,13 +59,16 @@ export default {
   ** Global CSS
   */
   css: [
-    '~assets/styles/main.css'
+    '~assets/styles/main.css',
   ],
+  loading: { color: '#39b982' },
+
   /*
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
+    '@plugins/element-ui'
   ],
   /*
   ** Auto import components

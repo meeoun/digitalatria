@@ -10,8 +10,16 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.0",
+    "bootstrap": "^4.5.3",
+    "bootstrap-vue": "^2.18.0",
     "chokidar": "^3.4.2",
-    "nuxt": "^2.14.0"
+    "element-ui": "^2.13.2",
+    "nuxt": "^2.14.0",
+    "vue": "^2.6.12",
+    "vue-js-modal": "^2.0.0-rc.6",
+    "vuetify": "^2.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@mdi/font": "^5.7.55"
+  }
 }

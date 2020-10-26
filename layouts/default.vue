@@ -8,6 +8,8 @@
         </div>
       </div>
       <div class="container">
+
+
         <div class="row">
           <div class="col-sm-8">
             <nuxt />
@@ -24,11 +26,13 @@
 
         </div>
       </div>
+
+
     </section>
     <Footer />
   </div>
-</template>
 
+</template>
 <script>
 import Nav from '~/components/navigation/Nav'
 import Footer from '@/components/footer/Footer'
