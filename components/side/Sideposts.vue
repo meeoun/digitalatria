@@ -60,33 +60,15 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+
+import {mapState} from "vuex";
 
 export default {
-  data(){
-    return{
-      popular: '',
-      recent: '',
-      top: ''
-    }
-
-  },
-  async mounted() {
-    let popular = `${this.$config.baseURL}/api/posts?published_at!=null&sort_by!=views&limit=5&assets`
-    let recent = `${this.$config.baseURL}/api/posts?published_at!=null&sort_by!=published_at&limit=5&assets`
-    let top = `${this.$config.baseURL}/api/posts?published_at!=null&sort_by!=views&limit=5&type=news&assets`
-    const requestOne = axios.get(popular)
-    const requestTwo = axios.get(recent)
-    const requestThree = axios.get(top)
-    axios.all([requestOne, requestTwo, requestThree]).then(axios.spread((...responses) => {
-      this.popular = responses[0].data.data
-      this.recent = responses[1].data.data
-      this.top = responses[2].data.data
-      // use/access the results
-    })).catch(errors => {
-      // react on errors.
-    })
-  }
+  computed: mapState({
+    popular: state => state.layout.popular,
+    recent: state => state.layout.recent,
+    top: state => state.layout.sideTop
+  })
 }
 
 </script>

@@ -7,7 +7,7 @@
 <script>
 
 import Category from "@/components/category/Category";
-import axios from "axios";
+import {mapState} from "vuex";
 
 
 export default {
@@ -15,27 +15,28 @@ export default {
   components: {
     Category
   },
+async fetch({store, error, params}) {
+
+  try {
+    await store.dispatch('category/fetchPosts', params)
+  }catch (e) {
+    error({
+      statusCode: 404,
+      message: 'Unable to fetch post'
+    })
+  }
+},
   computed:{
     path: function (){
       return this.$route.fullPath.substring(1)
-    }
+    },
+    ...mapState({
+      posts: state => state.category.posts
+    })
+
   },async validate({ params }){
     let allowed =["reviews", "tutorials", "news"]
     return allowed.includes(params.category);
-  },
-  data(){
-    return{
-      posts: ''
-    }
-  },
-  async asyncData({$config: { baseURL}, params}){
-    const [posts] = await Promise.all([
-      axios.get(`${baseURL}/api/posts?published_at!=null&sort_by!=published_at&limit=10&assets&type=${params.category}`),
-    ])
-    return{
-      posts: posts.data.data,
-    }
-
   }
 
 

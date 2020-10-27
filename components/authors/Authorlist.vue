@@ -8,20 +8,11 @@
       <div class="autor-content">
 
         <div class="autor-title">
-          <h1><span>Jane Smith</span><a href="autor-details.html">18 Posts</a></h1>
-          <ul class="autor-social">
-            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="#" class="google"><i class="fa fa-google-plus"></i></a></li>
-            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="#" class="youtube"><i class="fa fa-youtube"></i></a></li>
-            <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-            <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-            <li><a href="#" class="dribble"><i class="fa fa-dribbble"></i></a></li>
-          </ul>
+          <h1><span>{{author.name}}</span><a href="autor-details.html">{{author.posts}} Posts</a></h1>
         </div>
 
         <p>
-          Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer adipiscing risus a sem. Nullam quis massa sit amet nibh viverra malesuada.
+          {{author.bio}}
         </p>
 
       </div>
@@ -31,12 +22,8 @@
     <div class="autor-last-line">
       <ul class="autor-tags">
         <li><span><i class="fa fa-bars"></i>Category</span></li>
-        <li><a href="#">News</a></li>
-        <li><a href="#">Fashion</a></li>
-        <li><a href="#">Politics</a></li>
-        <li><a href="#">Sport</a></li>
+        <li v-for="cat in author.types"><a href="#">{{cat}}</a></li>
       </ul>
-      <a href="#" class="autor-site">http://www.janesmith.com</a>
     </div>
   </li>
   </ul>
@@ -51,18 +38,6 @@ export default {
       default: null,
       required: true
     }
-  },methods:{
-    onScroll ({ target: { scrollTop, clientHeight, scrollHeight }}) {
-      if (scrollTop + clientHeight >= scrollHeight) {
-        console.log("at bottom")
-      }
-      console.log("in function")
-    }
-  },created () {
-    //window.addEventListener('scroll', this.onScroll);
-  },
-  destroyed () {
-   // window.removeEventListener('scroll', this.onScroll);
   }
 
 }

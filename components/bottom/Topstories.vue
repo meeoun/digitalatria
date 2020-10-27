@@ -57,24 +57,12 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import {mapState} from "vuex";
 
 export default {
-  data() {
-    return {
-      posts: ''
-    }
-  },
-  mounted() {
-    let top = `${this.$config.baseURL}/api/posts?published_at!=null&sort_by!=views&limit=10&assets`
-    const requestOne = axios.get(top);
-    axios.all([requestOne]).then(axios.spread((...responses) => {
-      this.posts = responses[0].data.data
-      // use/access the results
-    })).catch(errors => {
-      // react on errors.
-    })
-  }
+computed: mapState({
+  posts: state => state.layout.top,
+})
 }
 
 

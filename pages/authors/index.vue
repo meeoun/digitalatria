@@ -7,26 +7,19 @@
 <script>
 
 import Authors from "@/components/authors/Authors";
-import axios from "axios";
+import {mapState} from "vuex";
 
 
 export default {
   components: {
     Authors
   },
-data(){
-  return{
-    authors: ''
-  }
-},
-  async asyncData({$config: { baseURL}}){
-    const [authors] = await Promise.all([
-      axios.get(`${baseURL}/api/authors`),
-    ])
-    return{
-      authors: authors.data.data,
-    }
+async fetch({store, error}){
+  await store.dispatch('authors/fetchAuthors');
 
-  }
+},
+computed: mapState({
+  authors: state => state.authors.authors
+})
 }
 </script>
