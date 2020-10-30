@@ -14,9 +14,9 @@
               <ReviewBox :post=post />
               </div>
               <PostTags />
-              <MoreAuthor :author=post.author />
+              <MoreAuthor :author=author />
               <AlsoLike />
-              <CommentBox :count=post.comments :comments=post.comment_data />
+              <CommentBox :count=post.comments :comments=post.comment_data.comments />
             </div>
 
           </div>
@@ -39,7 +39,10 @@ export default {
   props: {
     post: {
       type: Object,
-      default: null,
+      required: true
+    },
+    author: {
+      type: Object,
       required: true
     }
   },

@@ -9,7 +9,7 @@
               </div>
 
 
-                <AuthorList :authors=authors />
+                <AuthorList :authors=authors :links="links" />
 
             </div>
 
@@ -17,22 +17,17 @@
           </div>
 </template>
 <script>
-import AuthorList from '@/components/authors/Authorlist'
-import Social from '@/components/side/Social'
-import Posts from '@/components/side/Sideposts'
 
 export default {
   props: {
     authors: {
       type: Array,
-      default: null,
-      required: true
+      default: null
+    },
+    links: {
+      type: Array,
+      default: null
     }
-  },
-  components:{
-    AuthorList,
-    Social,
-    Posts
   }
 }
 

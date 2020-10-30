@@ -37,6 +37,15 @@ export default {
   getAuthors(){
     return apiClient.get(`authors`)
   },
+  getMoreAuthors(link){
+    return apiClient(link)
+  },
+  getAuthor(slug){
+    return apiClient.get(`authors?slug=${slug}`)
+  },
+  getAuthorPosts(id){
+    return apiClient.get(`/author/${id}/posts`)
+  },
   getCategory(category){
     return apiClient.get(`posts?published_at!=null&sort_by!=published_at&limit=10&assets&type=${category}`)
   }

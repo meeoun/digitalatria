@@ -1,6 +1,6 @@
 <template>
-  <ul class="autor-list">
-  <li v-for="author in authors" :key="author.id" >
+  <ul class="autor-list" v-infinite-scroll="load" style="overflow:auto; height: 600px;">
+  <li v-for="author in authors" :key="author.id"  class="infinite-list-item">
     <div class="autor-box">
 
       <img :src=author.image :alt=author.name>
@@ -35,8 +35,17 @@ export default {
   props: {
     authors: {
       type: Array,
-      default: null,
-      required: true
+      default: null
+    },
+    links: {
+      type: Array,
+      default: null
+    }
+  },methods: {
+    load(){
+      console.log("Hello")
+      if(this.links && this.links.length > 0)
+      this.$store.dispatch('authors/fetchMoreAuthors', this.links[0]);
     }
   }
 

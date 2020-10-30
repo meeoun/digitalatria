@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Post :post=post />
+    <Post :post=post :author="author" />
   </div>
 </template>
 
@@ -17,6 +17,7 @@ export default {
 
     try {
       await store.dispatch('posts/fetchPost', params)
+      await store.dispatch('posts/fetchAuthor',store.state.posts.post.author.id)
     }catch (e) {
       error({
         statusCode: 404,
@@ -24,7 +25,8 @@ export default {
       })
     }
   },computed: mapState({
-    post: state => state.posts.post
+    post: state => state.posts.post,
+    author: state=>state.posts.author
   })
   ,mounted() {
     tocbot.init({

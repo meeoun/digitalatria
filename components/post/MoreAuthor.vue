@@ -13,23 +13,14 @@
 
       <div class="tab-pane active" id="about-autor">
         <div class="autor-box">
-          <img src="/upload/users/avatar1.jpg" alt="">
+          <img :src=author.image :alt=author.name>
           <div class="autor-content">
             <div class="autor-title">
-              <h1><span>Jane Smith</span><a href="autor-details.html">18 Posts</a></h1>
-              <ul class="autor-social">
-                <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#" class="google"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#" class="youtube"><i class="fa fa-youtube"></i></a></li>
-                <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="#" class="dribble"><i class="fa fa-dribbble"></i></a></li>
-              </ul>
+              <h1><span>{{author.name}}</span><a href="autor-details.html">{{author.post_count}} Posts</a></h1>
             </div>
             <p>
-              Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer adipiscing risus a sem. Nullam quis massa sit amet nibh viverra malesuada.
-            </p>
+              {{author.bio}}
+         </p>
           </div>
         </div>
       </div>
@@ -37,42 +28,12 @@
       <div class="tab-pane" id="more-autor">
         <div class="more-autor-posts">
 
-          <div class="news-post image-post3">
-            <img src="/upload/news-posts/gal1.jpg" alt="">
+          <div v-for="post in author.post_data.posts" :key="post.id" class="news-post image-post3">
+            <img :src=post.images.main.dimension_185_80.url :alt=post.name>
             <div class="hover-box">
-              <h2><a href="single-post.html">Donec odio. Quisque volutpat mattis eros.</a></h2>
+              <h2><nuxt-link :to="'/'+post.type+'/'+post.slug">{{post.title}}</nuxt-link></h2>
               <ul class="post-tags">
-                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="news-post image-post3">
-            <img src="/upload/news-posts/gal2.jpg" alt="">
-            <div class="hover-box">
-              <h2><a href="single-post.html">Nullam malesuada erat ut turpis. </a></h2>
-              <ul class="post-tags">
-                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="news-post image-post3">
-            <img src="/upload/news-posts/gal3.jpg" alt="">
-            <div class="hover-box">
-              <h2><a href="single-post.html">Suspendisse urna nibh.</a></h2>
-              <ul class="post-tags">
-                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="news-post image-post3">
-            <img src="/upload/news-posts/gal4.jpg" alt="">
-            <div class="hover-box">
-              <h2><a href="single-post.html">Donec nec justo eget felis facilisis fermentum. Aliquam </a></h2>
-              <ul class="post-tags">
-                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
+                <li><i class="fa fa-clock-o"></i>{{post.dates.created}}</li>
               </ul>
             </div>
           </div>
@@ -88,8 +49,7 @@ export default {
   props: {
     author: {
       type: Object,
-      default: null,
-      required: true
+      default: null
     }
   }
 }

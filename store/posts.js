@@ -4,7 +4,8 @@ export const state = () =>({
   news: [],
   reviews: [],
   latest: [],
-  post: {}
+  post: {},
+  author: {}
 })
 
 export const mutations = {
@@ -20,6 +21,10 @@ export const mutations = {
   SET_POST(state, post)
   {
     state.post = post
+  },
+  SET_AUTHOR(state, author)
+  {
+    state.author = author
   }
 }
 
@@ -43,7 +48,11 @@ export const actions = {
     return APIService.getPost(params.category, params.slug).then(response => {
       commit('SET_POST', response.data.data[0])
     })
+  },
+  fetchAuthor({ commit }, id) {
+    return APIService.getAuthorPosts(id).then(response => {
+      commit('SET_AUTHOR', response.data.data)
+    })
   }
-
 
 }
