@@ -31,10 +31,10 @@
 </template>
 <script>
 export default {
-  props: ['reviews'],
-  data() {
-    return {
-      reviewLink: 'reviews'
+  props: {
+    reviews: {
+      type: Array,
+      default: null
     }
   }
 }

@@ -2,10 +2,20 @@
   <div class="post-tags-box">
     <ul class="tags-box">
       <li><i class="fa fa-tags"></i><span>Tags:</span></li>
-      <li><a href="#">News</a></li>
-      <li><a href="#">Fashion</a></li>
-      <li><a href="#">Politics</a></li>
-      <li><a href="#">Sport</a></li>
+      <li v-for="tag in tags" :key="tag.id"> <nuxt-link :to="'/tags/'+tag.slug">{{tag.name}}</nuxt-link> </li>
     </ul>
   </div>
 </template>
+
+
+<script>
+export default {
+  props: {
+    tags: {
+      type: Array,
+      required: true
+    }
+  }
+}
+
+</script>

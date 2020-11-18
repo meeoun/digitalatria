@@ -19,8 +19,10 @@
                     <h2><nuxt-link :to="'/'+post.type+'/'+post.slug">{{post.title}}</nuxt-link></h2>
                     <ul class="post-tags">
                       <li><i class="fa fa-clock-o"></i>{{post.dates.created}}</li>
-                      <li><i class="fa fa-user"></i>by <a href="#">{{post.author.name}}</a></li>
+                      <li><i class="fa fa-user"></i>by <nuxt-link :to="'/authors/'+post.author.slug">{{post.author.name}}</nuxt-link></li>
                       <li><i class="fa fa-eye"></i>{{post.views}}</li>
+
+
                     </ul>
                     <p>{{post.body}}</p>
                     <div v-if="post.type === 'reviews'" class="rate-level">
@@ -41,7 +43,12 @@
 </template>
 <script>
 export default {
-  props:['posts']
+
+  props: { posts: {
+    type: Array,
+    default: null
+  }
+  },
 
 }
 

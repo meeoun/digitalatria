@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <Nav />
     <section class="block-wrapper">
       <div class="col-md-1" style="margin-top: 90px">
@@ -21,6 +22,12 @@
               <Social />
 
               <SidePosts />
+              <div class="advertisement">
+                <div class="desktop-advert">
+                  <span>Welcome!</span>
+                </div>
+              </div>
+
             </div>
           </div>
 
@@ -34,21 +41,9 @@
 
 </template>
 <script>
-import Nav from '~/components/navigation/Nav'
-import Footer from '@/components/footer/Footer'
-import SidePosts from '@/components/side/Sideposts'
-import Social from '@/components/side/Social'
 
 
-export default {
-  components:{
-    Nav,
-    Footer,
-    SidePosts,
-    Social
-  }
 
-}
 </script>
 
 

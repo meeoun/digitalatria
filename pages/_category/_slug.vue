@@ -6,18 +6,13 @@
 
 <script>
 
-import Post from '~/components/post/Post'
 import { mapState } from 'vuex'
 
 export default {
-  components: {
-    Post,
-  },
   async fetch({store, error, params}) {
 
     try {
       await store.dispatch('posts/fetchPost', params)
-      await store.dispatch('posts/fetchAuthor',store.state.posts.post.author.id)
     }catch (e) {
       error({
         statusCode: 404,

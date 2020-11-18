@@ -40,14 +40,35 @@ export default {
   getMoreAuthors(link){
     return apiClient(link)
   },
+ getMorePosts(link){
+    return apiClient(link)
+ },
   getAuthor(slug){
     return apiClient.get(`authors?slug=${slug}`)
   },
-  getAuthorPosts(id){
-    return apiClient.get(`/author/${id}/posts`)
+  getAuthorPosts(slug){
+    return apiClient.get(`/author/${slug}/posts`)
   },
   getCategory(category){
-    return apiClient.get(`posts?published_at!=null&sort_by!=published_at&limit=10&assets&type=${category}`)
+    return apiClient.get(`posts?published_at!=null&sort_by!=published_at&paginate=2&assets&type=${category}`)
+  },
+  getTag(tag){
+    return apiClient.get(`/tags/${tag}`)
+  },
+  getSearch(filter){
+    return apiClient.get(`/search/posts?search=${filter}`)
+  },
+  getLayout(){
+    return apiClient.get(`layout`)
+  },
+  getContactMessage(){
+    return apiClient.get(`contact`)
+  },
+  storeContactMessage(form){
+    return apiClient.post(`contact`,form)
+  },
+  checkRecaptcha(token){
+    return apiClient.post(`recaptcha`, token)
   }
 
 

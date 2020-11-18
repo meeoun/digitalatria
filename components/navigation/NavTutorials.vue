@@ -28,6 +28,11 @@
 </template>
 <script>
 export default {
-  props: ['tutorials']
+  props: {
+    tutorials: {
+      type: Array,
+      default: null
+    }
+  },
 }
 </script>

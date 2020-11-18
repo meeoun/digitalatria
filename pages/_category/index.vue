@@ -1,20 +1,17 @@
 <template>
   <div>
-    <Category :category=path :posts="posts" />
+    <Category :category=path :posts="posts" :links="links" />
   </div>
 </template>
 
 <script>
 
-import Category from "@/components/category/Category";
+
 import {mapState} from "vuex";
 
 
 export default {
   props:['category'],
-  components: {
-    Category
-  },
 async fetch({store, error, params}) {
 
   try {
@@ -31,7 +28,8 @@ async fetch({store, error, params}) {
       return this.$route.fullPath.substring(1)
     },
     ...mapState({
-      posts: state => state.category.posts
+      posts: state => state.category.posts,
+      links: state => state.category.links
     })
 
   },async validate({ params }){

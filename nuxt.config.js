@@ -68,7 +68,12 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '@plugins/element-ui'
+    '@plugins/element-ui',
+    '@plugins/scrollLoading.client.js',
+    {src: '@plugins/particles.js', mode: 'client'},
+    {src: '@plugins/vueparticles.js', mode: 'client'},
+    {src: '@plugins/sweetalert.js', mode: 'client'},
+
   ],
   /*
   ** Auto import components
@@ -85,8 +90,15 @@ export default {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/recaptcha'
   ],
+  recaptcha: {
+    hideBadge: false, // Hide badge element (v3 & v2 via size=invisible)
+    siteKey: '6LdM2uMZAAAAAKaHKWVJESmT64mobxa5GP9E9eXB', // Site key for requests
+    version: 2, // Version
+    size: 'normal' // Size: 'compact', 'normal', 'invisible' (v2)
+  },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options

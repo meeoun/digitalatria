@@ -29,14 +29,17 @@ export const mutations = {
   },
   SET_POSTS(state, posts) {
     state.posts = posts
+  },
+  ADD_POSTS(state, posts){
+    posts.forEach(function (item) {
+      state.posts.push(item)
+    });
   }
 }
 
 export const actions = {
   fetchAuthors({ commit, state }) {
 
-    if(state.authors.length < 1)
-    {
       return APIService.getAuthors().then(response => {
         let links = response.data.meta.links.filter((link)=>{
           return  !isNaN(link.label) && !link.active
@@ -44,10 +47,12 @@ export const actions = {
         links = links.map((link)=>{
           return  link.url
         })
+
         commit('SET_AUTHORS', response.data.data)
         commit('SET_LINKS',links)
+
       })
-    }
+
 
   },
   fetchMoreAuthors({ commit }, link){
@@ -60,6 +65,26 @@ export const actions = {
     return APIService.getAuthor(slug).then(response => {
       commit('SET_AUTHOR', response.data.data)
   })
+  },
+  fetchAuthorPosts({ commit }, slug) {
+    return APIService.getAuthorPosts(slug).then(response => {
+        let links = response.data.data.post_data.links.filter((link) => {
+          return !isNaN(link.label) && !link.active;
+        })
+        links = links.map((link) => {
+          return link.url;
+        })
+        commit('SET_AUTHOR', response.data.data);
+        commit('SET_POSTS', response.data.data.post_data.posts);
+        commit('SET_LINKS', links);
+
+    })
+  },
+  fetchMoreAuthorPosts({ commit }, link){
+    return APIService.getMorePosts(link).then(response => {
+      commit('ADD_POSTS', response.data.data)
+      commit('REMOVE_LINK', link)
+    })
   }
 
 }

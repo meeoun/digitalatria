@@ -4,6 +4,7 @@ export const state = () =>({
   news: [],
   reviews: [],
   latest: [],
+  top:[],
   post: {},
   author: {}
 })
@@ -25,6 +26,10 @@ export const mutations = {
   SET_AUTHOR(state, author)
   {
     state.author = author
+  },
+  SET_TOP(state, post)
+  {
+    state.top = post
   }
 }
 
@@ -52,6 +57,11 @@ export const actions = {
   fetchAuthor({ commit }, id) {
     return APIService.getAuthorPosts(id).then(response => {
       commit('SET_AUTHOR', response.data.data)
+    })
+  },
+  fetchTop({ commit }) {
+    return APIService.getTop.then(response => {
+      commit('SET_TOP', response.data.data)
     })
   }
 

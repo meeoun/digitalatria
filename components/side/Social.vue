@@ -5,25 +5,16 @@
     </div>
     <ul class="social-share">
       <li>
-        <a href="#" class="rss"><i class="fa fa-rss"></i></a>
-        <span class="number">9,455</span>
+        <a href="#" class="google"><i class="fa fa-youtube"></i></a>
+        <span class="number">0</span>
         <span>Subscribers</span>
       </li>
       <li>
-        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-        <span class="number">56,743</span>
-        <span>Fans</span>
-      </li>
-      <li>
-        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-        <span class="number">43,501</span>
+        <a href="#" class="facebook"><i class="fa fa-linkedin"></i></a>
+        <span class="number">0</span>
         <span>Followers</span>
       </li>
-      <li>
-        <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
-        <span class="number">35,003</span>
-        <span>Followers</span>
-      </li>
+
     </ul>
   </div>
 </template>

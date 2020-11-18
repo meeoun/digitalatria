@@ -862,7 +862,7 @@ section.ticker-news {
   -o-transition: all 0.2s ease-in-out;
 }
 .ticker-news-box .ticker {
-  width: 879px;
+  width: 75%;
 }
 .ticker-news-box .ticker-controls li:after {
   color: #666666;

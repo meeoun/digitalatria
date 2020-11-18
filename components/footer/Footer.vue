@@ -4,19 +4,17 @@
       <div class="footer-widgets-part">
         <div class="row">
           <div class="col-md-3">
-            <About />
-            <Connected />
+            <FooterAbout :about="about" />
           </div>
           <div class="col-md-3">
-            <Posts />
+            <FooterPosts :posts="posts" />
           </div>
           <div class="col-md-3">
-           <Tags />
-            <RSS />
+           <FooterTags :tags="tags" />
           </div>
 
           <div class="col-md-3">
-          <Photos />
+          <FooterPhotos :images="images" />
           </div>
 
 
@@ -27,22 +25,16 @@
 </template>
 
 <script>
-import About from '@/components/footer/About'
-import Connected from '@/components/footer/Connected'
-import Posts from '@/components/footer/Footerposts'
-import Tags from '@/components/footer/Tags'
-import RSS from '@/components/footer/RSS'
-import Photos from '@/components/footer/Photos'
+
+import {mapState} from "vuex";
 
 export default {
-  components:{
-    About,
-    Connected,
-    Posts,
-    Tags,
-    RSS,
-    Photos
-  }
+  computed: mapState({
+    about: state => state.layout.about,
+    posts: state => state.layout.footerPosts,
+    tags: state => state.layout.footerTags,
+    images: state => state.layout.footerImages
+  })
 }
 
 </script>

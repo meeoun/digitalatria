@@ -20,18 +20,18 @@
             </div>
           </div>
 
-          <Topstories />
+          <TopStories />
 
         </div>
 
-      </div>
+      </div>F
 
       <div class="col-sm-4">
 
         <!-- sidebar -->
         <div class="sidebar">
           <Social />
-          <Posts />
+          <SidePosts />
 
         </div>
 
@@ -44,16 +44,7 @@
 </template>
 <script>
 
-import Topstories from '@/components/bottom/Topstories'
-import Social from '@/components/side/Social'
-import Posts from '@/components/side/Sideposts'
 export default {
-
-  components:{
-    Topstories,
-    Social,
-    Posts
-  }
 
 }
 </script>

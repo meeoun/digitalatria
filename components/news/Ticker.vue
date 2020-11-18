@@ -17,7 +17,12 @@
 <script>
 
 export default {
-  props: ['news'],
+  props: {
+    news: {
+      type: Array,
+      default: null
+    }
+  },
 mounted() {
   try{
     $('#js-news').ticker({

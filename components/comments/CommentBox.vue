@@ -32,7 +32,6 @@
 
 </template>
 <script>
-import CommentReply from "@/components/comments/CommentReply"
 
 export default {
   props: {
@@ -46,8 +45,6 @@ export default {
       default: null,
       required: true
     }
-  },components:{
-    CommentReply
-  },
+  }
 }
 </script>

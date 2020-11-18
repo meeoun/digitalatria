@@ -3,45 +3,14 @@
     <div class="title-section">
       <h1><span>You may also like</span></h1>
     </div>
-    <div class="owl-carousel" data-num="3">
+    <div class="owl-carousel" :data-num=posts.length>
 
-      <div class="item news-post image-post3">
-        <img src="/upload/news-posts/2.jpg" alt="">
+      <div v-for="post in posts" :key="post.id" class="item news-post image-post3">
+        <img :src=post.images.main.dimension_250_200.url :alt=post.name>
         <div class="hover-box">
-          <h2><a href="single-post.html">Donec odio. Quisque volutpat mattis eros.</a></h2>
+          <h2><nuxt-link :to="'/'+post.type+'/'+post.slug">{{post.title}}</nuxt-link></h2>
           <ul class="post-tags">
-            <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="item news-post image-post3">
-        <img src="/upload/news-posts/3.jpg" alt="">
-        <div class="hover-box">
-          <h2><a href="single-post.html">Nullam malesuada erat ut turpis. </a></h2>
-          <ul class="post-tags">
-            <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="item news-post video-post">
-        <img src="/upload/news-posts/4.jpg" alt="">
-        <a href="https://www.youtube.com/watch?v=LL59es7iy8Q" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-        <div class="hover-box">
-          <h2><a href="single-post.html">Lorem ipsum dolor sit consectetuer adipiscing elit. Donec odio. </a></h2>
-          <ul class="post-tags">
-            <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="item news-post image-post3">
-        <img src="/upload/news-posts/2.jpg" alt="">
-        <div class="hover-box">
-          <h2><a href="single-post.html">Donec nec justo eget felis facilisis fermentum. Aliquam </a></h2>
-          <ul class="post-tags">
-            <li><i class="fa fa-clock-o"></i>27 may 2013</li>
+            <li><i class="fa fa-clock-o"></i>{{post.dates.created}}</li>
           </ul>
         </div>
       </div>
@@ -49,3 +18,18 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    posts: {
+      type: Array,
+      default: null
+    }
+  },mounted() {
+
+
+  }
+
+
+}
+</script>

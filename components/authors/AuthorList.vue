@@ -1,5 +1,6 @@
 <template>
-  <ul class="autor-list" v-infinite-scroll="load" style="overflow:auto; height: 600px;">
+  <ul v-loading="loading" v-infinite-scroll="load" style="overflow-y: auto; overflow-x: hidden; height: 600px;" id="scrollBox"
+       element-loading-text="Fetching More Posts..." class="autor-list">
   <li v-for="author in authors" :key="author.id"  class="infinite-list-item">
     <div class="autor-box">
 
@@ -8,7 +9,7 @@
       <div class="autor-content">
 
         <div class="autor-title">
-          <h1><span>{{author.name}}</span><a href="autor-details.html">{{author.posts}} Posts</a></h1>
+          <h1><span>{{author.name}}</span><nuxt-link :to="'/authors/'+author.slug">{{author.posts}} Posts</nuxt-link></h1>
         </div>
 
         <p>
@@ -22,7 +23,7 @@
     <div class="autor-last-line">
       <ul class="autor-tags">
         <li><span><i class="fa fa-bars"></i>Category</span></li>
-        <li v-for="cat in author.types"><a href="#">{{cat}}</a></li>
+        <li v-for="cat in author.types"><nuxt-link :to="'/'+cat">{{cat}}</nuxt-link></li>
       </ul>
     </div>
   </li>
@@ -41,11 +42,25 @@ export default {
       type: Array,
       default: null
     }
-  },methods: {
-    load(){
-      console.log("Hello")
+  },data(){
+    return {
+      loading: false
+
+    }
+  },
+  methods: {
+    async load(){
       if(this.links && this.links.length > 0)
-      this.$store.dispatch('authors/fetchMoreAuthors', this.links[0]);
+      {
+        let scrollBox = document.getElementById('scrollBox');
+        let position = scrollBox.scrollTop;
+        this.$loadScrollBar(scrollBox, position)
+        this.loading =true;
+        await this.$store.dispatch('authors/fetchMoreAuthors', this.links[0]);
+        this.loading = false;
+        this.$loadScrollBar(scrollBox, position)
+      }
+
     }
   }
 

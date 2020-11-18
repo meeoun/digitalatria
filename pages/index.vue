@@ -5,26 +5,18 @@
 
     <HeadingNews :posts="reviews" />
 
-    <Latestnews :posts="latest" />
+    <LatestNews :posts="latest" />
 
   </div>
 </template>
 
 <script>
 
-import Ticker from '~/components/news/Ticker';
-import HeadingNews from '~/components/news/HeadingNews';
-import Latestnews from '~/components/news/Latestnews';
 import { mapState } from 'vuex'
 
 
 export default {
   layout: 'front',
-  components: {
-    Ticker,
-    HeadingNews,
-    Latestnews
-  },
   async fetch({store, error}){
     await store.dispatch('posts/fetchNews');
     await store.dispatch('posts/fetchReviews');
