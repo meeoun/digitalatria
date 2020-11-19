@@ -3,12 +3,13 @@
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
 
       <!-- Top line -->
-      <div class="top-line">
+      <div class="top-line" style="height: 30px; padding: 0px;">
         <div class="container">
           <div class="row">
             <div class="col-md-9">
               <ul class="top-line-list">
-              <li><a href="#">Click Here to Log In</a></li>
+                <li><nuxt-link to="/login">Login</nuxt-link></li>
+                <li><nuxt-link to="/register">Register</nuxt-link></li>
               </ul>
             </div>
             <div class="col-md-3">

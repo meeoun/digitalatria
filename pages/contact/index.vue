@@ -122,6 +122,7 @@ methods: {
         await this.$store.dispatch('contact/storeContactMessage', this.form);
         this.resetForm('contact-form')
         this.loading = false;
+        this.disableSubmit = true;
         this.showConfirm();
       } else {
         this.showFail()
