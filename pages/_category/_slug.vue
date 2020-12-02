@@ -1,6 +1,29 @@
 <template>
-  <div>
-    <Post :post=post :author="author" />
+  <!-- block content -->
+  <div class="block-content">
+    <div class="single-post-box">
+      <div class="js-toc-content">
+        <Title :post=post />
+        <h1>{{post.id}}</h1>
+
+        <PostCarousel :images=post.images.carousel :caption=post.gallery_caption />
+
+        <PostData :content=post.content />
+      </div>
+      <PostGallery :images=post.images.gallery  />
+      <div v-if="post.type === 'reviews'">
+        <ReviewBox :post=post />
+      </div>
+      <PostTags :tags="post.tags" />
+      <MoreAuthor :author=post.author />
+
+      <AlsoLike :posts="post.also_like" />
+
+      <CommentForm :post="post.id" />
+
+      <CommentBox />
+
+    </div>
   </div>
 </template>
 
@@ -21,7 +44,9 @@ export default {
     }
   },computed: mapState({
     post: state => state.posts.post,
-    author: state=>state.posts.author
+    author: state=>state.posts.author,
+    comment_count: state=>state.posts.comment_count,
+    comments: state=>state.posts.comments
   })
   ,mounted() {
     tocbot.init({

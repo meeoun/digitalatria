@@ -6,15 +6,16 @@
     <!-- contact form box -->
     <div class="contact-form-box">
       <div class="title-section">
-        <h1><span>Register</span></h1>
+        <h1><span>Account Settings</span></h1>
       </div>
-      <el-form id="register-form"
+      <el-form id="account-form"
                v-loading="loading"
-               element-loading-text="Registering"
+               element-loading-text="Updating"
                element-loading-spinner="el-icon-loading"
                :rules="rules"
-               ref="register-form"
+               ref="account-form"
                :model="form"
+               enctype="multipart/form-data"
       >
         <div class="row">
 
@@ -50,16 +51,21 @@
             </el-form-item>
           </div>
 
-        </div>
 
+          <div class="col-md-6 text-center">
+            <el-form-item label="Avatar Image: Click to Set">
+            <PictureUpload :width=100 :height=100 name="avatar-picture" :defaultImage="$auth.user.image" @new-image="getImage" style="float: right" />
+            </el-form-item>
+          </div>
+
+        </div>
 
         <el-form-item>
 
-          <el-button type="primary" @click="submitForm('register-form')" :disabled="disableSubmit">Login</el-button>
+          <el-button type="primary" @click="submitForm('account-form')" :disabled="disableSubmit">Update</el-button>
 
         </el-form-item>
 
-        <GoogleRecaptcha @recaptcha-status="getStatus" />
 
 
       </el-form>
@@ -72,10 +78,12 @@
   </div>
 </template>
 <script>
-import APIService from "@/services/APIService";
+import APIAuthService from "@/services/APIAuthService";
+
 export default {
-  middleware: ['guest'],
+  middleware: ['auth'],
   data() {
+
     let validatePass2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('Please input the password again'));
@@ -87,14 +95,15 @@ export default {
     };
 
     return {
-      disableSubmit: true,
+      disableSubmit: false,
       loading: false,
       form: {
-        name: '',
-        email: '',
-        nick_name: '',
+        name: this.$auth.user.name,
+        email: this.$auth.user.email,
+        nick_name: this.$auth.user.nick_name,
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
+        avatar: ''
       },rules: {
         email: [
           { required: true, message: 'Please input email address', trigger: 'blur' },
@@ -118,7 +127,6 @@ export default {
           { validator: validatePass2, trigger: ['blur', 'change']}
         ]
 
-
       }
     }
   },
@@ -127,35 +135,41 @@ export default {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
           this.loading = true;
-          await this.$recaptcha.reset()
           let pass = true;
           /*Registration needed*/
-            await APIService.register(this.form).catch(error =>{
-              pass = false;
-              this.showServerFail(error.response.data)
-            });
+
+          await APIAuthService.accountUpdate(this.convertForm(this.form),this.$auth.getToken('local')).catch(error =>{
+            pass = false;
+            this.showServerFail(error.response.data.message)
+          });
           if(pass){
-            this.resetForm('register-form');
             this.showConfirm();
           }
           this.loading = false;
-          this.disableSubmit = true;
         } else {
           this.showFail()
           return false;
         }
       })
-
-
-
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    convertForm(p){
+      const formData = new FormData()
+      for (let key of Object.keys(p)) {
+        console.log(key + " -> " + p[key])
+        if(p[key])
+        {
+          formData.append(key,p[key])
+        }
+      }
+      return formData
+    },
+    getImage(image){
+      this.form.avatar=image;
     },
     showConfirm() {
       // Use sweetalert2
-      this.$swal('Registered!',
-        'You must confirm your email before you can log in.',
+      this.$swal('Account Updated',
+        'If you changed your email, You must confirm your email before you can log back in.',
         'success');
     },
     showFail() {
@@ -165,11 +179,8 @@ export default {
         'warning');
     },showServerFail(message){
       this.$swal('Errors',
-        this.$laravelError(message),
+        message,
         'error');
-    },
-    getStatus(value){
-      this.disableSubmit = value
     }
   }
 }

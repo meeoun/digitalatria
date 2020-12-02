@@ -47,11 +47,11 @@ export default {
     {
       let scrollBox = document.getElementById('scrollBox');
       let position = scrollBox.scrollTop;
-      this.$loadScrollBar(scrollBox, position)
+      this.$loadScrollBar(scrollBox, position);
       this.loading =true;
       await this.$store.dispatch('category/fetchMorePosts', this.links[0]);
       this.loading = false;
-      this.$loadScrollBar(scrollBox, position)
+      this.$loadScrollBar(scrollBox, position);
     }
 
   }

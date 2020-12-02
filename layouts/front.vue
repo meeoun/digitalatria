@@ -34,13 +34,10 @@
 import {mapState} from "vuex";
 
 export default {
+  name: 'Front',
   layout: 'front',
-  fetch({store, error}){
-     store.dispatch('posts/fetchTop');
-
-  },
   computed: mapState({
-    top: state => state.posts.top
+    top: state => state.layout.top
   })
 }
 </script>

@@ -43,6 +43,9 @@ export default {
  getMorePosts(link){
     return apiClient(link)
  },
+  getMoreLink(link){
+    return apiClient(link)
+  },
   getAuthor(slug){
     return apiClient.get(`authors?slug=${slug}`)
   },
@@ -61,6 +64,9 @@ export default {
   getLayout(){
     return apiClient.get(`layout`)
   },
+  getFront(){
+    return apiClient.get(`front`)
+  },
   getContactMessage(){
     return apiClient.get(`contact`)
   },
@@ -69,7 +75,23 @@ export default {
   },
   checkRecaptcha(token){
     return apiClient.post(`recaptcha`, token)
+  },
+  register(form){
+    return apiClient.post(`register`,form)
+  },
+  resendVerification(form) {
+    return apiClient.post(`verification/resend`, form)
+  },
+  verification(query){
+    return apiClient.post(`verification/verify?${query}`)
+  },
+  passwordEmail(form){
+    return apiClient.post(`password/email`,form)
+  },
+  passwordReset(form,query){
+    return apiClient.post(`password/reset?${query}`, form)
   }
+
 
 
 }

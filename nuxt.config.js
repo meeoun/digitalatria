@@ -2,7 +2,10 @@
 export default {
 
   publicRuntimeConfig: {
-    baseURL: 'http://localhost'
+    baseURL: 'http://localhost',
+    axios: {
+      browserBaseURL: process.env.BROWSER_BASE_URL
+    }
   },
 
   /*
@@ -70,6 +73,7 @@ export default {
   plugins: [
     '@plugins/element-ui',
     '@plugins/scrollLoading.client.js',
+    '@plugins/laravelError.js',
     {src: '@plugins/particles.js', mode: 'client'},
     {src: '@plugins/vueparticles.js', mode: 'client'},
     {src: '@plugins/sweetalert.js', mode: 'client'},
@@ -91,8 +95,26 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/recaptcha'
+    '@nuxtjs/recaptcha',
+    '@nuxtjs/auth'
   ],
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/login', method: 'post', propertyName: 'data.token', withCredentials: true },
+          logout: { url: '/logout', method: 'post',withCredentials: true },
+          user: { url: '/me', method: 'get', propertyName: 'data.user',withCredentials: true }
+        },
+        // tokenRequired: true,
+        //tokenType: 'bearer',
+        // globalToken: true,
+        // autoFetchUser: true
+      }
+    }
+  },
+
   recaptcha: {
     hideBadge: false, // Hide badge element (v3 & v2 via size=invisible)
     siteKey: '6LdM2uMZAAAAAKaHKWVJESmT64mobxa5GP9E9eXB', // Site key for requests
@@ -103,7 +125,14 @@ export default {
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
-  axios: {},
+  axios: {
+    baseURL: 'http://laravel.net/api/',
+  },
+  privateRuntimeConfig: {
+    axios: {
+      baseURL: process.env.BASE_URL
+    }
+  },
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/

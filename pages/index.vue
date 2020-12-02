@@ -5,7 +5,7 @@
 
     <HeadingNews :posts="reviews" />
 
-    <LatestNews :posts="latest" />
+    <LatestNews :posts="tutorials" />
 
   </div>
 </template>
@@ -18,15 +18,12 @@ import { mapState } from 'vuex'
 export default {
   layout: 'front',
   async fetch({store, error}){
-    await store.dispatch('posts/fetchNews');
-    await store.dispatch('posts/fetchReviews');
-    await store.dispatch('posts/fetchLatest');
-
+    await store.dispatch('posts/fetchFront');
   },
   computed: mapState({
     news: state => state.posts.news,
     reviews: state => state.posts.reviews,
-    latest: state => state.posts.latest
+    tutorials: state => state.posts.tutorials
   })
 }
 </script>

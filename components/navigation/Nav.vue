@@ -7,10 +7,16 @@
         <div class="container">
           <div class="row">
             <div class="col-md-9">
-              <ul class="top-line-list">
+              <ul v-if="!$auth.loggedIn" class="top-line-list">
                 <li><nuxt-link to="/login">Login</nuxt-link></li>
                 <li><nuxt-link to="/register">Register</nuxt-link></li>
               </ul>
+
+              <ul v-else class="top-line-list">
+                <li><nuxt-link to="/account/settings">Account Settings</nuxt-link></li>
+                <li><a @click.prevent="logout" style="cursor: pointer">Logout</a> </li>
+              </ul>
+
             </div>
             <div class="col-md-3">
               <!--  <NavSocial /> -->
@@ -69,14 +75,21 @@
 </template>
 <script>
 
-import axios from "axios"
+import APIAuthService from "@/services/APIAuthService";
 import {mapState} from "vuex";
 
 export default {
   computed: mapState({
     reviews: state => state.layout.navigation.reviews,
     tutorials: state => state.layout.navigation.tutorials
-  }),mounted() {
+  }),methods: {
+    async logout(){
+      await APIAuthService.logout(this.$auth.getToken('local')).then(
+        this.$auth.logout()
+      )
+    }
+  }
+  ,mounted() {
     try {
       let owlWrap = $('.owl-wrapper');
 
